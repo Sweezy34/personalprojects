@@ -1,0 +1,40 @@
+student_scores = [150, 142, 185, 120, 171, 184, 149, 24, 59, 68, 199, 78, 65, 89, 86, 55, 91, 64, 89]
+
+max_score = 0
+for score in student_scores:
+    if score > max_score:
+        max_score = score
+
+print(max_score)
+
+min_score = max_score
+for little_score in student_scores:
+    if little_score < max_score:
+        min_score = little_score
+
+print(min_score)
+
+#The following is what I wrote after speaking with ya
+
+student_scores = [150, 142, 185, 120, 171, 184, 149, 24, 59, 68, 199, 78, 65, 89, 86, 55, 91, 64, 89]
+
+#########################################################################################################
+
+#The following is what I wrote after speaking with ya
+
+#########################################################################################################
+
+minimum = student_scores[0]
+maximum = student_scores[0]
+
+for new_score in student_scores:
+    if new_score <= minimum:
+        minimum = new_score
+    elif new_score >= maximum:
+        maximum = new_score
+
+print(f" {minimum} \n {maximum}")
+
+# The above function uses indexing (student_scores[0]) which calls the first value in the list above. This first value is then compared in the same loop vs the first function,
+# which first defines max score as 0, then finds the max score in the first loop by comparing each value in the list to 0, then uses a second loop to compaire each score to
+# the max score to find the minimum. Intexing allows me to compare the next score with the previous one instead of using an arbatrary number like 0. Second bit of code is much leaner and more efficient.
