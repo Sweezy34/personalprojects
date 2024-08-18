@@ -1,0 +1,153 @@
+def turn_right():
+    for i in range(3):
+        i = turn_left()
+
+def hurdle():
+    move()
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+    
+for complete in range(6):
+    hurdle()
+
+#same code using a while loop
+number_of_hurdles = 6
+while number_of_hurdles > 0:
+    hurdle()
+    number_of_hurdles -= 1
+    print(number_of_hurdles)
+
+#game now introduces the "at_goal()" function, using a while loop, I can negate the check 'at_goal()' and reeborg will continue to go until 'at_goal()' = true
+while not at_goal():
+    hurdle()
+#for loops are great for lists & knowing how many needed for an output, #while loop is great for until a condition is met
+#this for me is mostly review, i've done some work with functions but haven't used them so much, I've understood while and for loops, but now i'm getting more practice and it's coming easier
+#everyone will create infinite loops without knowledge at some time, using print() at the condition will show
+
+#slight change in hurdle fucnction, hurdles still only 1 block in size. new functions learned in reeborg library: front_is_clear() and wall_in_front()
+def hurdle():
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+    
+while not at_goal():
+    if front_is_clear() == True:
+        move()
+    elif wall_in_front() == True:
+        hurdle()
+
+#random hurdle size and random placement, new function 'right_is_clear()' used to check if there is a hurdle still there. With this function, I don't have to turn to face the hurdle in order to check if its clear or not, simplifies code. hurdle exercise #4
+#instructor challanged to make code less than 24 lines as that's how many she used, the following only uses 22 ;P
+
+def hurdle():
+    turn_left()
+    move()
+    while wall_on_right():
+        move()
+    turn_right()
+    move()
+    turn_right()
+    while front_is_clear():
+        move()
+    if not front_is_clear():
+        turn_left()
+    
+while not at_goal():
+    if front_is_clear() == True:
+        move()
+    elif wall_in_front() == True:
+        hurdle()
+
+#the following is what I came up with after seeing the solution, removed an unnessecary move() command at the top of the hurdle() function as well as removed the if statement which checks if the front is not clear as it was unnecessary for this challange.
+def turn_right():
+    for i in range(3):
+        i = turn_left()
+
+def hurdle():
+    turn_left()
+    while wall_on_right():
+        move()
+    turn_right()
+    move()
+    turn_right()
+    while front_is_clear():
+        move()
+    turn_left()
+    
+while not at_goal():
+    if front_is_clear():
+        move()
+    elif wall_in_front():
+        hurdle()
+
+#code is now 20 lines, I LOVE TWAKING MY CODE TO BE MORE EFFECIENT! :D
+#side note, no longer getting very many syntax errors, i'm getting a good flow of things
+
+#Daily capstone, gotta figure out how to get reeborg out of a maze!
+#Maze is a fixed level, position and direction of Reeborg is completely randomized in this set level.
+#I was informed the trick is to have Reeborg follow the right side of the maze, I'm writing this before the challange and part of me wishes I didn't know the trick beforehand so I can have a greater challange.
+#Here we go!!!!
+
+while not at_goal():
+    if right_is_clear():
+        turn_right()
+        move()
+    elif front_is_clear():
+        move()
+    else:
+        turn_left()
+
+#It took me 3 attempts to get this one right. My first attempt I tried to borrow off of my original 'hurdle()' function and create an if/elif statement regarding where Reeborg should go.
+#I scrapped it after I got stuck in an infinite loop with reborg. 2nd attempt looked a lot like above, except i started the code with 'front_is_clear' -> move().
+#third attempt is what I got above, I found that I already have the answer with the trick is having Reeborg follow the right side of the maze.
+#Soo it only makes sense for me to check if the right side is clear... DUH! Once I got it, I found it to be actually easier than the last hurdle challange.
+#Took some screenshots as a reference to what Reeborg's worls looks like. See attached.
+
+#Soooo, turns out the above code may put us in an infinite loop if Reeborg starts off at one of the positions, professor states to restart Reeborg for now, return to it when we start programming intermediate.
+#TLDR: don't worry about it right now, revisit later. Will create a new file upon revisiting.
+
+#as an extra bit of fun, I tried to complete the Rain 2 world, but I got stuck, the following is the code I have so far.
+
+def turn_right():
+    for i in range(3):
+        i = turn_left()
+        
+def build_right_wall():
+    turn_right()
+    build_wall()
+    turn_left()
+
+
+def rain_solution():
+    while not at_goal():
+        if wall_in_front():
+            turn_left()
+        elif front_is_clear() and wall_on_right():
+            move()
+        elif not wall_on_right() and right_is_clear():
+            turn_right()
+            if front_is_clear():
+                move()
+            else:
+                build_wall()
+                turn_left()
+
+for init in range(3):
+    move()
+turn_right()
+move()    
+rain_solution()
+
+#The problem I have is that when Reeborg goes into the randomly shaped house with random windows on the wall, the 'front_is_clear' function or any 'clear' function does
+#not actually detect the water outside. What essentially ends up happening is Reeborg checks to see if there's a wall on the right, if not, he looks at it, and decides whether
+#or not to build a wall there. What happens is he starts building walls in his own house when there is a possible right hand turn. It's almost 5am and i'm too tired to finish
+#this problem, but it's been a fun challange so far. I'll see if I can't finish it another time.
