@@ -48,3 +48,114 @@ hangman()
 #This is my best attempt at hangman without trying to follow along with the lesson and doing it completely on my own. The idea is to pick a random word from the first list and then create another list with the same length full of underscores.
 #It was supposed to work by swapping the correct letter with the dashes in the same index, but I couldn't quite get it to work. I went to bed yesterday frustrated and a little behind on the class.
 #Going to try and follow along with the professor now, still, I gave it the old-fashoned try.
+
+
+#Below is my final solution (insert bad hitler joke here) to the hangman() problem. I had to follow along some parts of this with the professor, but I kinda get it... sort of.
+#Still not entirely solid on how the program knows what to index where, but I think if I sat down with it and really took a look I'd get it better.
+#At this point i'm sick of this program and I'm happy to kiss it goodbye... i hate hangman! >:( good riddance!!!
+
+import random
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+word_list = ["aardvark", "baboon", "camel"]
+
+
+lives = 6
+chosen_word = random.choice(word_list)
+print(chosen_word)
+
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+    placeholder += "_"
+print(placeholder)
+
+game_over = False
+correct_letters = []
+
+while not game_over:
+    guess = input("Guess a letter: ").lower()
+
+    display = ""
+
+    for letter in chosen_word:
+        if letter == guess:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
+        else:
+            display += "_"
+
+    print(display)
+
+    if "_" not in display:
+        game_over = True
+        print("You win.")
+        break
+
+    if guess not in chosen_word:
+        lives -= 1
+
+    if lives == 0:
+        print("Game Over")
+        print(stages[lives])
+        break
+
+    print(stages[lives])
+
+#looking back, I think I should have made the ascii art in this a separate library and then just import it, just to make it all look cleaner. Like I said above though, I'm done with this haha
