@@ -159,3 +159,68 @@ while not game_over:
     print(stages[lives])
 
 #looking back, I think I should have made the ascii art in this a separate library and then just import it, just to make it all look cleaner. Like I said above though, I'm done with this haha
+
+
+*************************************************************************************
+#Just for giggles, I asked ChatGPT to see if it could help correct my original code, this is what it gave me:
+
+import random
+
+def hangman():
+    # List of possible words for the game
+    words = ["police", "boots", "taser", "computer", "america"]
+    
+    # Randomly select a word from the list
+    chosen_word = random.choice(words)
+    word_list = list(chosen_word)  # Convert the word to a list of characters
+    display_list = ["-" for _ in chosen_word]  # Create a list to show progress in guessing
+    
+    num_guesses = 6  # Set a reasonable number of guesses for the player
+    guessed_letters = set()  # To keep track of guessed letters
+    
+    # Main game loop
+    while num_guesses > 0 and "-" in display_list:
+        # Display current state of the word, number of guesses left, and guessed letters
+        print(f"Current word: {' '.join(display_list)}")
+        print(f"Guesses left: {num_guesses}")
+        print(f"Guessed letters: {', '.join(sorted(guessed_letters))}")
+        
+        # Get user input and convert to lowercase
+        guess = input("Pick a letter: ").lower()
+        
+        # Validate input: must be a single alphabetic character
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter a single letter.")
+            continue
+        
+        # Check if the letter has already been guessed
+        if guess in guessed_letters:
+            print("You've already guessed that letter.")
+            continue
+        
+        guessed_letters.add(guess)  # Add the guessed letter to the set
+        
+        # Check if the guessed letter is in the word
+        if guess in word_list:
+            print("Guess is right!")
+            # Update the display_list with all occurrences of the guessed letter
+            for i, letter in enumerate(word_list):
+                if letter == guess:
+                    display_list[i] = guess
+        else:
+            # Incorrect guess; decrement the number of guesses left
+            num_guesses -= 1
+            print("Guess is wrong.")
+        
+        print()
+    
+    # Check if the game is won or lost
+    if "-" not in display_list:
+        print(f"Congratulations! You've guessed the word: {''.join(display_list)}")
+    else:
+        print(f"Sorry, you've run out of guesses. The word was: {chosen_word}")
+
+hangman()
+
+
+#It also explained the changes in comments below.... isn't technology amazing?!!
