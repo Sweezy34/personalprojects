@@ -1,0 +1,83 @@
+#i've discovered ChatGPT to be the ultimate coding companion/tutor
+#my attempt at the encryption
+
+def encrypt(original_text , shift_amount):
+    shift_amount = shift_amount
+    encrypted_text = []
+    for char in original_text:
+
+        if char in alphabet:
+            original_index = alphabet.index(char)
+            new_index = (original_index + shift_amount) % len(alphabet)
+            encrypted_text.append(alphabet[new_index])
+        else:
+            original_text.append(char)
+
+    print(''.join(encrypted_text))
+
+text = input("Type in a word \n")
+shift = int(input("What is your shift? \n"))
+encrypt(text , shift)
+
+#proffessor solution
+
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+
+def encrypt(original_text, shift_amount):
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the encoded result: {cipher_text}")
+
+
+encrypt(original_text=text, shift_amount=shift)
+
+#it seems as though I keep using lists to split up strings and keep getting myself a little confused, but i mean, it works right?
+#program combined encryption / decryption
+
+def caesar():
+    while True:
+        direction = input("Would you like to 'encode' or 'decode'? Type 'Quit' to exit. \n")
+        if direction == "encode".lower():
+            text = input("Enter word to encode \n")
+            shift = int(input("Enter a shift value \n"))
+            encrypt(text.lower(), shift)
+            break
+        elif direction == "decode".lower():
+            text = input("Enter a word to decode \n")
+            shift = int(input("Enter a shift value \n"))
+            decrypt(text.lower(), shift)
+            break
+        elif direction == 'quit'.lower():
+            print("Byeeeeee")
+            quit()
+        else:
+            print("//Enter a valid value//")
+
+
+
+caesar()
+
+#solution.... it's even easier than reversing the shift value and typing it all over again.
+
+def caesar(original_text, shift_amount, encode_or_decode):
+    output_text = ""
+    for letter in original_text:
+
+        if encode_or_decode == "decode":
+            shift_amount *= -1
+
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        output_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
+
+
+caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+# I can simplify my code so much by adding a multiplication to the entire thing.... i just keep learning so much. It doesn't stop
