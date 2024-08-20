@@ -40,7 +40,11 @@ def hangman():
     if num_guesses == 0:
         print("You suck and you lose")
     elif not word_list:
-        print("You win ho")
+        print("You win")
 
    
 hangman()
+
+#This is my best attempt at hangman without trying to follow along with the lesson and doing it completely on my own. The idea is to pick a random word from the first list and then create another list with the same length full of underscores.
+#It was supposed to work by swapping the correct letter with the dashes in the same index, but I couldn't quite get it to work. I went to bed yesterday frustrated and a little behind on the class.
+#Going to try and follow along with the professor now, still, I gave it the old-fashoned try.
