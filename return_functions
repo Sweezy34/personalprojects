@@ -9,3 +9,48 @@ def is_leap_year(year):
         return False
 
 #the above code checks for leap years all in one function
+
+
+########## the following is a calculator I wrote
+
+def add(n1, n2):
+    return n1 + n2
+
+def subtract(n1, n2):
+    return n1 - n2
+
+def multiply(n1, n2):
+    return n1 * n2
+
+def divide(n1, n2):
+    if n2 !=0:
+        return n1 / n2
+    else:
+        return "Cannot divide by zero"
+
+
+while True:
+    n1 = int(input("Enter your first number \n"))
+    if n1 == type(int) or type(float):
+        break
+    else:
+        print("Enter a valid number")
+        quit()
+
+operator = input("Enter in an arithmitic operator of + , - , *, or /")
+
+while True:
+    operations = {
+        "+": add,
+        "-": subtract,
+        "*": multiply,
+        "/": divide,
+    }
+
+    if operator in operations:
+        n2 = int(input("Enter second number "))
+        print(f"Result:  {operations[operator](n1, n2)}")
+        break
+    else:
+        print("Enter a valid operation")
+        break
