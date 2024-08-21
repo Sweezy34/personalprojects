@@ -97,3 +97,32 @@ travel_log = {
 
 print(travel_log["Germany"]["cities_visited"][2])
 
+###################################################################
+# Below is a silent auction program I created. Needed some help with the logic at the end, but its nothing i hadn't done before. I used ChatGPT to help me fix a mistake I kept making, but I was almost there!
+
+bids = {}
+cont = True
+
+while cont:
+    name = input("Enter your name \n")
+    price = int(input("Enter your bid \n"))
+    bids[name] = price
+    # print(bids)
+    print(bids[name])
+    new_bid = input("Would you like to add another name & bid? Y/N")
+
+    if new_bid == "Y".lower():
+        continue
+    elif new_bid == "N".lower():
+        break
+
+highest_bid = 0
+highest_bidder = ""
+
+for key in bids:
+    if bids[key] > highest_bid:
+        highest_bid = bids[key]
+        highest_bidder = key
+
+
+print(f"{highest_bidder} bid the highest at ${highest_bid}! Congratulations!")
