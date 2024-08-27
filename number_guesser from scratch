@@ -1,0 +1,74 @@
+#Assignment: Create a number guessing game from scratch as shown in lecture
+#Must have an easy mode with 10 attempts, and a hard mode with 5 attempts
+#number must be an int 1-100, num must be random
+#Add comments to code for readability, also make a 'to do list'
+
+#TODOS:
+#print welcome screen, ask if easy or hard mode
+#import random, have comp choose a randint between 1-100`
+#print 'thinking of a num' ask player to pick 1-100
+#tell player if num is higher or lower
+#profit?
+#probably going to have to make num of guesses a global var that will change based on difficulty
+
+import random
+from logging import fatal
+
+#correct number will be below, i think second num is exclusive
+#add global variable of correct number
+COR_NUM = random.randrange(1,101)
+print(COR_NUM)
+
+#function tells player if guess is greater or less than COR_NUM or if correct, quits
+def guess(num):
+    while num:
+        if int(num) > COR_NUM:
+            print("Nope, the number is lower than your guess")
+        elif int(num) < COR_NUM:
+            print("Nope, the number is higher than your guess")
+        elif int(num) == COR_NUM:
+            print(f"{num} is the correct answer!")
+            quit()
+        else:
+            print("Enter a valid input.")
+
+#Create number of guesses var
+guesses = 0
+
+#init
+print("Welcome to the number guessing game.\n")
+
+
+#code below assigns guesses var to be 5 or 10
+#create var choice which loops the code below until correct input
+
+choice = True
+while choice:
+
+    # asks player input easy or hard
+    mode = input("Easy or Hard mode?\n")
+
+    if mode == "Easy".lower():
+        guesses = 10
+        choice = False
+    elif mode == "Hard".lower():
+        guesses = 5
+        choice = False
+    else:
+        print("Enter a valid input")
+
+print(f"I'm thinking of a number between 1 and 100, you have {guesses} guesses!")
+
+while guesses > 0:
+    player_guess = input()
+    guess(player_guess)
+    guesses -= 1
+    print(f"You have {guesses} guesses left!")
+
+    if player_guess == COR_NUM:
+        print("You guessed it! Congrats!")
+        quit()
+
+if guesses <= 0:
+    print(f"Sorry, looks like you ran out, the number was {COR_NUM}")
+    quit()
