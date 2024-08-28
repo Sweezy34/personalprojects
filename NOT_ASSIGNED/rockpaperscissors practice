@@ -1,0 +1,75 @@
+#rock paper scissors
+import random
+
+#function below is the main game
+def main():
+    #rock paper and scissors don't need to change every time, they're constant and don't need to be in the loop
+    choices = ['rock', 'paper', 'scissors']
+
+    while True:
+        
+        #computer choice needs to be in loop IOT make sure a different choice is picked every loop
+        computer_choice = random.choice(choices)
+        
+        #code works by checking what the computer chose first, then comparing it with what the user chose
+        #this is what i could get working initially, i know there's probably a more efficient way.
+
+        if computer_choice == 'rock':
+
+            user_choice = input('rock, paper, or scissors? \n')
+            print(f'computer chose {computer_choice}')
+            if user_choice == 'rock'.lower():
+                print('draw')
+                break
+            elif user_choice == 'paper'.lower():
+                print('you win')
+                break
+            elif user_choice == 'scissors'.lower():
+                print('you lose')
+                break
+            else:
+                print('Enter a valid input')
+
+        elif computer_choice == 'paper':
+
+            user_choice = input('rock, paper, or scissors? \n')
+            print(f'computer chose {computer_choice}')
+            if user_choice == 'rock'.lower():
+                print('you lose')
+                break
+            elif user_choice == 'paper'.lower():
+                print('draw')
+                break
+            elif user_choice == 'scissors'.lower():
+                print('you win')
+                break
+            else:
+                print("enter a valid input")
+
+        elif computer_choice == 'scissors':
+
+            user_choice = input('rock, paper, or scissors? \n')
+            print(f'computer chose {computer_choice}')
+            if user_choice == 'rock'.lower():
+                print('you win')
+                break
+            elif user_choice == 'paper'.lower():
+                print('you lose')
+                break
+            elif user_choice == 'scissors'.lower():
+                print('draw')
+                break
+            else:
+                print("enter a valid input")
+
+#this is where the program actually starts. asks user if they want to play the game above or not and keeps
+#looping until play or quit.
+while True:
+
+    play_again = input('Would you like to play? y/n \n')
+    if play_again == "y".lower():
+        main()
+    elif play_again == "n".lower():
+        quit()
+    else:
+        print('enter a valid input')
