@@ -1,0 +1,65 @@
+#import art, random, and game_data. Art is just ascii art for the program, game_data is a dictionary with the data on it
+import art
+import game_data
+import random
+
+def dictionary_compare(top, value1, bottom, value2):
+    if top[value1] >= bottom[value2]:
+        return top
+    else:
+        return bottom
+
+#create a function which will display the dictionary in text
+
+#print first line of art at beginning of program
+print(art.logo)
+
+
+
+#select an initial random number, make it the top dictionary.
+#use index to select a random dictionary from the list, start is 0, second value is the length of dictionary
+
+play = True
+user_score = 0
+top_dict = game_data.data[random.randint(0, len(game_data.data)-1 )]
+
+while play:
+
+
+    bottom_dict = game_data.data[random.randint(0, len(game_data.data)-1)]
+
+    # Below Debugs the answer for testing
+    # print(f"Top followers: {top_dict["follower_count"]} \n"
+    #       f"Bottom followers {bottom_dict["follower_count"]}")
+
+    print(f"A: {top_dict["name"]} who is a(n) {top_dict["description"]} from {top_dict["country"]} \n {art.vs} \n"
+          f"B: {bottom_dict["name"]} who is a(n) {bottom_dict["description"]} from {bottom_dict["country"]}")
+
+
+    correct_dict = dictionary_compare(top_dict, "follower_count", bottom_dict, "follower_count")
+
+    correct_input = True
+    #player makes a choice A or B
+    while correct_input:
+        player_choice = input("Who has more followers: A/B? \n")
+
+        #assign player choice to top function or bottom function
+
+        if player_choice == "a".lower():
+            player_choice = top_dict
+            break
+        elif player_choice == "b".lower():
+            player_choice = bottom_dict
+            break
+        else:
+            print("enter a correct input")
+
+    if player_choice == correct_dict:
+        print("you chose correctly")
+        top_dict = player_choice
+        user_score += 1
+        print(f"Score:{user_score}")
+    else:
+        print(f"Incorrect, game over! Your final score is: \n"
+              f"{user_score}")
+        play = False
